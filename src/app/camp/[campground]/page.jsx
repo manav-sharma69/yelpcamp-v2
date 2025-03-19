@@ -39,7 +39,7 @@ import { X } from "lucide-react";
 
 export async function generateStaticParams() {
   const campgrounds = await getCampgrounds();
-  return campgrounds.map((campground) => ({ slug: campground.id }));
+  return campgrounds.map((campground) => ({ campground: campground.id }));
 }
 
 export default async function CampgroundPage({ params }) {

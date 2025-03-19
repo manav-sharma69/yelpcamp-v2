@@ -1,0 +1,130 @@
+/* COLORS / THEMEING */
+.dialog-heading {
+  border-bottom: 2px solid;
+}
+
+.dialog-close-wrapper {
+  background-color: white;
+  border-top: 1.5px solid;
+}
+
+/* TYPOGRAPHY */
+
+/* LAYOUT */
+.dialog-wrapper {
+  position: relative;
+}
+
+.dialog-content-wrapper {
+  padding: 0;
+}
+
+.dialog-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 16px 10px;
+}
+
+.dialog-title,
+.dialog-description {
+  margin: 0;
+}
+
+.dialog-content {
+  padding-block-end: 64px;
+}
+
+/* styles only activate when its child is selected image grid */
+.dialog-content:has(.selected-image-grid-wrapper) {
+  position: relative;
+  overflow: hidden;
+}
+
+.dialog-close-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  max-height: 64px;
+}
+
+.scroll-area {
+  height: 300px;
+  padding-block-end: 16px;
+  padding: 16px;
+}
+
+.selected-image-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.selected-image-grid-item {
+  isolation: isolate;
+  position: relative;
+  height: 220px;
+}
+
+.selected-image {
+  border-radius: var(--radius-4);
+  aspect-ratio: 1/1;
+}
+
+.image-delete-btn {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 520px) {
+  .scroll-area {
+    height: 430px;
+  }
+
+  .dialog-content:has(.selected-image-grid-wrapper) {
+    height: 500px;
+  }
+}
+
+@media (min-width: 395px) {
+  .dialog-content-wrapper {
+    width: 360px;
+  }
+
+  /* .dialog-content:has(.selected-image-grid-wrapper) {
+    height: 500px;
+  } */
+
+  .selected-image-grid-item {
+    --dim: 300px;
+    width: var(--dim);
+    height: var(--dim);
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 520px) {
+  .dialog-content-wrapper {
+    scale: 125%;
+  }
+
+  .selected-image-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .selected-image-grid-item {
+    height: 150px;
+    width: 100%;
+    margin-inline: 0;
+  }
+}

@@ -1,0 +1,30 @@
+.image-input-wrapper {
+  padding: 12px;
+}
+.image-input-box {
+  border: 2px dashed;
+  color: var(--accent-12);
+  border-radius: var(--radius-3);
+
+  /* height: 340px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block-end: 12px;
+  row-gap: 12px;
+}
+
+.photo-file-input-button {
+  cursor: pointer;
+  font-family: var(--font-montserrat);
+}
+
+.drag-n-drop-heading {
+  font-family: var(--font-montserrat);
+  user-select: none;
+}
+
+.drag-n-drop-text {
+  user-select: none;
+}

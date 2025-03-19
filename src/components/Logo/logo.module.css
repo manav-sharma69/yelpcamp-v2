@@ -1,0 +1,22 @@
+.svg, .span{
+    color: var(--logo-color);
+    white-space: nowrap;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.svg{
+    padding-inline: 2px;
+    width: 43px;
+    display: inline;
+}
+
+@media (max-width: 420px){
+    .span{
+        display: none;
+    }
+
+    .svg{
+        width: 65px;
+    }
+}

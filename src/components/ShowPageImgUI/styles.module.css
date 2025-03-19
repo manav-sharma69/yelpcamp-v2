@@ -1,0 +1,117 @@
+/* ⚠️ DON'T GET CONFUSED ⚠️ */
+/* GRID STYLES ARE DESKTOP-FIRST */
+/* CAROUSEL STYLES ARE MOBILE-FIRST */
+
+/* GRID STYLES */
+.grid-wrapper {
+  margin-inline: auto;
+  display: grid;
+  gap: 10px;
+  border-radius: 16px;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  position: relative;
+}
+
+.grid-item {
+  position: relative;
+  --dimensions: 20vw;
+  width: var(--dimensions);
+  height: var(--dimensions);
+  aspect-ratio: 1 / 1;
+}
+
+.grid-item:first-of-type {
+  grid-row: span 2;
+  --dimensions-for-first: 40vw;
+  height: calc(var(--dimensions-for-first) + 2vh);
+  width: var(--dimensions-for-first);
+}
+
+.grid-item:first-of-type .grid-img {
+  border-radius: 12px 0 0 12px;
+}
+
+.grid-item:nth-child(3) .grid-img {
+  border-top-right-radius: 12px;
+}
+
+.grid-item:nth-child(5) .grid-img {
+  border-bottom-right-radius: 12px;
+}
+
+.imgs-list-trigger {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+}
+
+.imgs-list-wrapper {
+  position: relative;
+  --img-list-dimensions: 80%;
+  width: var(--img-list-dimensions);
+  height: 40vh;
+  aspect-ratio: 1 / 1;
+  margin-block-end: 16px;
+  margin-inline: auto;
+}
+
+@media (max-width: 1120px) {
+  .grid-item {
+    --dimension: 22vw;
+    width: var(--dimension);
+    height: var(--dimension);
+  }
+  .grid-item:first-of-type {
+    --dimension-for-first: 44vw;
+    width: var(--dimension-for-first);
+    height: var(--dimension-for-first);
+  }
+}
+
+@media (max-width: 744px) {
+  .grid-wrapper {
+    display: none;
+  }
+}
+
+/* CAROUSEL STYLES ARE MOBILE-FIRST */
+/* CAROUSEL STYLES */
+.carousel {
+  --carousel-dimensions: 100vw;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-stop: always;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-img-wrapper {
+  scroll-snap-align: start;
+  position: relative;
+  flex: 0 0 100%;
+  width: var(--carousel-dimensions);
+  height: calc(var(--carousel-dimensions) / 1.2);
+}
+
+.carousel-image {
+  object-fit: cover;
+}
+
+@media (min-width: 520px) {
+  .carousel-img-wrapper {
+    height: calc(var(--carousel-dimensions) / 1.5);
+  }
+}
+
+@media (min-width: 680px) {
+  .carousel-img-wrapper {
+    height: calc(var(--carousel-dimensions) / 1.8);
+  }
+}
+
+@media (width > 744px) {
+  .carousel {
+    display: none;
+  }
+}

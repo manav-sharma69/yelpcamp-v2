@@ -1,0 +1,55 @@
+.heading {
+  position: sticky;
+  top: 64px;
+  z-index: 2;
+  background-color: white;
+  border-top: 1px solid;
+}
+
+.grid {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "location contact-owner"
+    "review-summary contact-owner"
+    "author contact-owner"
+    "description contact-owner"
+    "review-summary-large review-summary-large"
+    "reviews reviews"
+    "map map";
+  column-gap: 10vw;
+}
+
+.grid-item-zero {
+  grid-area: contact-owner;
+}
+
+.grid-item-three,
+.grid-item-four,
+.grid-item-seven {
+  border-block-end: 1.5px solid hsl(0, 0%, 75%);
+}
+
+.grid-item-one {
+  grid-area: location;
+}
+.grid-item-three {
+  grid-area: author;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.grid-item-four {
+  grid-area: description;
+  padding: 16px 8px;
+  border: none;
+}
+
+.grid-item-seven {
+  border: none;
+  padding: 16px 0px;
+  grid-area: map;
+}

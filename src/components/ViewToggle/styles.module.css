@@ -1,0 +1,9 @@
+.toggle-button {
+  position: fixed;
+  margin: auto;
+  bottom: 5%;
+  left: 0;
+  width: fit-content;
+  right: 0;
+  z-index: 2;
+}

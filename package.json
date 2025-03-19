@@ -1,0 +1,35 @@
+{
+  "name": "yelpcamp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@maptiler/sdk": "^3.0.1",
+    "@radix-ui/react-form": "^0.1.1",
+    "@radix-ui/themes": "^3.2.0",
+    "@uploadthing/react": "^7.3.0",
+    "bcrypt": "^5.1.1",
+    "embla-carousel": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
+    "joi": "^17.13.3",
+    "lucide-react": "^0.475.0",
+    "motion": "^12.4.7",
+    "next": "15.1.6",
+    "next-auth": "^5.0.0-beta.25",
+    "pg": "^8.13.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-simple-star-rating": "^5.1.7",
+    "uploadthing": "^7.5.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.6"
+  }
+}

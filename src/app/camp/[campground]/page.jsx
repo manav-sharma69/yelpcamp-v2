@@ -114,12 +114,12 @@ function ContactAndPrice({ price, contactData }) {
                 Reserve
               </Button>
             </Dialog.Trigger>
-            <Dialog.Content>
+            <Dialog.Content size={{ initial: "1", xs: "2", sm: "3" }}>
               <Flex
                 width={"100%"}
                 align={"center"}
                 justify={"between"}
-                mb={"5"}
+                mb={{ initial: "2", sm: "5" }}
               >
                 <Dialog.Title>Contact Details</Dialog.Title>
                 <Dialog.Close>
@@ -137,12 +137,12 @@ function ContactAndPrice({ price, contactData }) {
               <Dialog.Description>
                 Contact Author Or Reserve Campground Online
               </Dialog.Description>
-              <Flex direction={"column"} gap={"5"}>
+              <Flex direction={"column"} gapY={"5"} mt={"3"}>
                 <Flex
                   gap={"4"}
-                  align={"center"}
+                  align={{ xs: "center" }}
                   justify={"center"}
-                  direction={"row"}
+                  direction={{ initial: "column", xs: "row" }}
                   width={"fit-content"}
                   mr={"auto"}
                 >
@@ -185,7 +185,12 @@ function ContactAndPrice({ price, contactData }) {
                 </Flex>
                 {(reservation_info || reservation_url) && (
                   <Card>
-                    <Flex align={"center"} justify={"between"}>
+                    <Flex
+                      align={{ initial: "start", sm: "center" }}
+                      justify={"between"}
+                      direction={{ initial: "column", sm: "row" }}
+                      mb={{ initial: "2", sm: "1" }}
+                    >
                       <Heading as="h3">Reservation</Heading>
                       {reservation_url && (
                         <Link href={reservation_url}>Reserve Here</Link>
@@ -196,7 +201,12 @@ function ContactAndPrice({ price, contactData }) {
                 )}
                 {(regulations_overview || regulations_url) && (
                   <Card>
-                    <Flex align={"center"} justify={"between"}>
+                    <Flex
+                      align={{ initial: "start", sm: "center" }}
+                      justify={"between"}
+                      direction={{ initial: "column", sm: "row" }}
+                      mb={{ initial: "2", sm: "1" }}
+                    >
                       <Heading as="h3">Regulations</Heading>
                       {regulations_url && (
                         <Link href={regulations_url}>View Regulations</Link>

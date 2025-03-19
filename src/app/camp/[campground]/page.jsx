@@ -103,8 +103,8 @@ function ContactAndPrice({ price, contactData }) {
   const emailAddresses = contacts.emailAddresses;
   return (
     <div className={styles["grid-item-zero"]}>
-      <Card style={{ width: "60%" }} mx={"auto"}>
-        <Flex direction={"column"} gap={"3"}>
+      <Card className={styles["grid-item-zero-card"]} mx={"auto"}>
+        <Flex direction={"column"} gap={"3"} width={"100%"}>
           <Text weight={"medium"} size={"6"} color="gray" highContrast>
             ${price} night
           </Text>

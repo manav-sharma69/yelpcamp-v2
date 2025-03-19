@@ -50,7 +50,13 @@ function TinySummary({ avg, total, loading }) {
 function LargeSummary({ avg, total, campgroundName, loading }) {
   return (
     <div className={styles["grid-item-five"]}>
-      <Flex align={"center"} justify={"between"} width={"100%"}>
+      <Flex
+        align={{ xs: "center" }}
+        justify={{ xs: "between" }}
+        width={"100%"}
+        direction={{ initial: "column", xs: "row" }}
+        gapY={{ initial: "3" }}
+      >
         <div>
           <Star fill="black" size={"24px"} />{" "}
           <Skeleton loading={loading}>
@@ -80,9 +86,11 @@ function AddReview({ campgroundName }) {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button variant="ghost" color="gray" highContrast size={"3"}>
-          Review Campground
-        </Button>
+        <div style={{ width: "fit-content" }}>
+          <Button variant="ghost" color="gray" highContrast size={"3"}>
+            Review Campground
+          </Button>
+        </div>
       </Dialog.Trigger>
       <Dialog.Content>
         <Flex width={"100%"} align={"center"} justify={"between"}>

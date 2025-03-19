@@ -1,28 +1,36 @@
 .heading {
   position: sticky;
-  top: 64px;
+  top: 55px; /* 0 - 420px: 55px & then 64px */
   z-index: 2;
   background-color: white;
   border-top: 1px solid;
 }
 
 .grid {
-  padding: 32px;
+  padding-block: 24px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "location contact-owner"
-    "review-summary contact-owner"
-    "author contact-owner"
-    "description contact-owner"
-    "review-summary-large review-summary-large"
-    "reviews reviews"
-    "map map";
-  column-gap: 10vw;
+    "contact-owner"
+    "location"
+    "review-summary"
+    "author"
+    "description"
+    "review-summary-large"
+    "reviews"
+    "map";
+  row-gap: 16px;
+  margin-inline: auto;
 }
 
 .grid-item-zero {
   grid-area: contact-owner;
+  width: 100%;
+}
+
+.grid-item-zero-card {
+  width: 100%;
+  max-width: 500px;
 }
 
 .grid-item-three,
@@ -52,4 +60,59 @@
   border: none;
   padding: 16px 0px;
   grid-area: map;
+}
+
+@media (min-width: 420px) {
+  .grid {
+    inline-size: 85vw;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 421px) {
+  .heading {
+    top: 64px;
+  }
+}
+
+@media (min-width: 700px) {
+  .grid {
+    padding: 32px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "location contact-owner"
+      "review-summary contact-owner"
+      "author author"
+      "description description"
+      "review-summary-large review-summary-large"
+      "reviews reviews"
+      "map map";
+    inline-size: unset;
+    column-gap: 32px;
+    max-width: none;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-areas:
+      "location contact-owner"
+      "review-summary contact-owner"
+      "author contact-owner"
+      "description contact-owner"
+      "review-summary-large review-summary-large"
+      "reviews reviews"
+      "map map";
+  }
+
+  .grid-item-zero {
+    position: relative;
+  }
+
+  .grid-item-zero-card {
+    position: sticky;
+    top: 140px;
+  }
 }

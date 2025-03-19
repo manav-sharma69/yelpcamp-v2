@@ -18,8 +18,7 @@ import AuthError from "../AuthError";
 export default function LoginForm({ setOpen }) {
   const { refresh } = React.useContext(SessionContext);
   const searchParams = useSearchParams();
-  const callbackUrl =
-    searchParams.get("callbackUrl") || "https://yelpcamp-v2-gamma.vercel.app/";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
   const [formState, formAction, isPending] = React.useActionState(
     authenticate,
     null

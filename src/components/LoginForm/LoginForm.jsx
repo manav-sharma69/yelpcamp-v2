@@ -19,7 +19,7 @@ export default function LoginForm({ setOpen }) {
   const { refresh } = React.useContext(SessionContext);
   const searchParams = useSearchParams();
   const callbackUrl =
-    searchParams.get("callbackUrl") || "http://localhost:3000";
+    searchParams.get("callbackUrl") || "https://yelpcamp-v2-gamma.vercel.app/";
   const [formState, formAction, isPending] = React.useActionState(
     authenticate,
     null

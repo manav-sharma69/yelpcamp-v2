@@ -78,7 +78,11 @@ export default function NavLinks() {
           // ) : (
           //   <LoggedInGuestMenu />
           // )
-          <LoggedInMenu currPath={currPath} hostingLabel={hostingLabel} />
+          <LoggedInMenu
+            role={role}
+            currPath={currPath}
+            hostingLabel={hostingLabel}
+          />
         ) : (
           <LoggedOutMenu currPath={currPath} />
         )}
@@ -87,7 +91,7 @@ export default function NavLinks() {
   );
 }
 
-function LoggedInMenu({ currPath, hostingLabel }) {
+function LoggedInMenu({ currPath, hostingLabel, role }) {
   const { refresh, toggleCTAs } = React.useContext(SessionContext);
   const { createToast } = React.useContext(ToastContext);
 
@@ -113,6 +117,14 @@ function LoggedInMenu({ currPath, hostingLabel }) {
             <Link href="/host">{hostingLabel}</Link>
           </DropdownMenu.Item>
         )}
+
+        {currPath.isHostingPage &&
+        !currPath.isCreateCampgroundPage &&
+        role === "host" ? (
+          <DropdownMenu.Item asChild>
+            <Link href="/host/new">List New Campground</Link>
+          </DropdownMenu.Item>
+        ) : null}
 
         <DropdownMenu.Separator />
 

@@ -11,7 +11,11 @@ export default async function NewCampground() {
     <>
       <ResponsiveContainer width={{ md: "60%", lg: "50%" }}>
         <Box asChild mt={"9"} mb={"8"}>
-          <Heading align={"center"} size={"9"} weight={"regular"}>
+          <Heading
+            align={"center"}
+            size={{ md: "9", xs: "8" }}
+            weight={"regular"}
+          >
             Add Campground
           </Heading>
         </Box>
@@ -19,7 +23,8 @@ export default async function NewCampground() {
           align={"center"}
           justify={"center"}
           direction={"column"}
-          width={"50%"}
+          width={{ sm: "60%" }}
+          maxWidth={{ initial: "480px", sm: "none" }}
           mx={"auto"}
         >
           <CGDetailsForm

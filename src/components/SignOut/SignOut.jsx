@@ -13,9 +13,5 @@ export default function SignOut() {
     signOut();
     refresh();
   }
-  return (
-    <Button variant="ghost" onClick={handleOnClick}>
-      Log Out
-    </Button>
-  );
+  return <Button onClick={handleOnClick}>Log Out</Button>;
 }

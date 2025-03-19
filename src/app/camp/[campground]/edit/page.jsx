@@ -25,7 +25,11 @@ export default async function EditCampground({ params }) {
     <>
       <ResponsiveContainer width={{ md: "60%", lg: "50%" }}>
         <Box asChild mt={"9"} mb={"8"}>
-          <Heading align={"center"} size={"9"} weight={"regular"}>
+          <Heading
+            align={"center"}
+            size={{ md: "9", xs: "8" }}
+            weight={"regular"}
+          >
             Edit Campground
           </Heading>
         </Box>
@@ -33,7 +37,8 @@ export default async function EditCampground({ params }) {
           align={"center"}
           justify={"center"}
           direction={"column"}
-          // width={"50%"}
+          // width={{ sm: "60%" }}
+          maxWidth={{ initial: "480px", sm: "none" }}
           mx={"auto"}
         >
           <CGDetailsForm

@@ -8,7 +8,7 @@ export default function RegisterUser() {
       <ResponsiveContainer style={{ placeItems: "center", display: "grid" }}>
         <Box asChild py={"6"} px={"5"} width={"350px"} mx={"auto"}>
           <Card variant="classic">
-            <Heading mb={"5"}>Log In</Heading>
+            <Heading mb={"5"}>Sign Up</Heading>
             <RegisterForm />
           </Card>
         </Box>

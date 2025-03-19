@@ -2,7 +2,10 @@
 import React from "react";
 import { getContactInfoByCampgroundID } from "@/utils/actions/contact-info-crud";
 import { getImagesByCampgroundID } from "@/utils/actions/imagesCrud";
-import { getCampgroundById } from "@/utils/actions/campgroundsCrud";
+import {
+  getCampgroundById,
+  getCampgrounds,
+} from "@/utils/actions/campgroundsCrud";
 import { fetchAddress } from "@/utils/maptiler/fetch-address";
 import { getUserByID } from "@/utils/actions/usersCrud";
 import { isAuthorized } from "@/utils/auth/helpers";
@@ -33,6 +36,11 @@ import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
 import Link from "@/components/Link";
 import { X } from "lucide-react";
+
+export async function generateStaticParams() {
+  const campgrounds = await getCampgrounds();
+  return campgrounds.map((campground) => ({ slug: campground.id }));
+}
 
 export default async function CampgroundPage({ params }) {
   const session = await auth();

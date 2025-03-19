@@ -165,8 +165,6 @@ const getUserByEmail = React.cache(
 
 export const getUserByID = React.cache(
   async function (id) {
-    // isLoggedIn?
-    if (!(await isLoggedIn())) return { serverError: 'unauthenticated req at getUserByID', message: 'Something went wrong.' };
     try {
       const { rows: userData } = await pool.query('SELECT * FROM users WHERE id=$1;', [id]);
       return userData[0];

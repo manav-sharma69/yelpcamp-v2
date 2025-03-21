@@ -11,9 +11,19 @@ import {
   FormMessage,
   FormSubmit,
 } from "@radix-ui/react-form";
-import { Box, Button, Flex, Text, TextField } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
 import { useSearchParams } from "next/navigation";
 import AuthError from "../AuthError";
+import useToggle from "@/utils/hooks/use-toggle";
+import { Eye, EyeOff } from "lucide-react";
+import HelperCard from "../HelperCard";
 
 export default function RegisterForm({ setOpen }) {
   const { refresh } = React.useContext(SessionContext);
@@ -24,8 +34,10 @@ export default function RegisterForm({ setOpen }) {
     null
   );
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [showPass, toggle] = useToggle();
 
   React.useEffect(() => {
+    console.log({ formState });
     let id;
     if (formState?.success) {
       if (typeof setOpen === "function") {
@@ -109,14 +121,42 @@ export default function RegisterForm({ setOpen }) {
             <FormField name="password">
               <Flex justify={"between"}>
                 <Text asChild size={"2"}>
-                  <FormLabel>Password</FormLabel>
+                  <Flex align={"center"}>
+                    <FormLabel>Password</FormLabel>
+                    <HelperCard
+                      message={
+                        "Password must contain: atleast one lowercase letter, one uppercase letter, one number, one symbol and should be 8-16 characters long."
+                      }
+                    />
+                  </Flex>
                 </Text>
                 <Text asChild weight={"regular"} size={"2"}>
                   <FormMessage match={"valueMissing"}></FormMessage>
                 </Text>
               </Flex>
               <FormControl asChild>
-                <TextField.Root required type="password" disabled={isPending} />
+                <TextField.Root
+                  type={showPass ? "text" : "password"}
+                  required
+                  disabled={isPending}
+                >
+                  <TextField.Slot side="right">
+                    <IconButton
+                      size={"1"}
+                      variant="ghost"
+                      color="gray"
+                      highContrast
+                      onClick={toggle}
+                      type="button"
+                    >
+                      {showPass ? (
+                        <Eye size={"16px"} color="black" />
+                      ) : (
+                        <EyeOff size={"16px"} color="black" />
+                      )}
+                    </IconButton>
+                  </TextField.Slot>
+                </TextField.Root>
               </FormControl>
             </FormField>
           </Box>

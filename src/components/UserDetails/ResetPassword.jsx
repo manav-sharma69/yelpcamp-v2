@@ -44,7 +44,7 @@ export default function ResetPassword({ username }) {
 
   function validatePassword(password) {
     const regex =
-      /^(?=.{8,16}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
     return regex.test(password);
   }
 
@@ -78,10 +78,10 @@ export default function ResetPassword({ username }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!passwordsNoMatch && !confirmPassInvalid && !newPassInvalid) {
-      const fd = new FormData(e.target);
-      React.startTransition(async () => formAction(fd));
-    }
+    // if (!passwordsNoMatch && !confirmPassInvalid && !newPassInvalid) {
+    //   const fd = new FormData(e.target);
+    //   React.startTransition(async () => formAction(fd));
+    // }
   }
 
   return (
@@ -147,9 +147,16 @@ export default function ResetPassword({ username }) {
               {/* new password */}
               <Flex direction={"column"} width={"100%"} mb={"3"}>
                 <Flex align={"center"} justify={"between"}>
-                  <Text as="label" htmlFor={`${id}-new-password`} size={"2"}>
-                    New Password
-                  </Text>
+                  <Flex align={"center"}>
+                    <Text as="label" htmlFor={`${id}-new-password`} size={"2"}>
+                      New Password
+                    </Text>
+                    <HelperCard
+                      message={
+                        "Password must contain: atleast one lowercase letter, one uppercase letter, one number, one symbol and should be 8-16 characters long."
+                      }
+                    />
+                  </Flex>
                   {newPassInvalid && (
                     <Text color="red" size={"2"}>
                       Invalid Pattern
@@ -193,6 +200,7 @@ export default function ResetPassword({ username }) {
                   >
                     Confirm Password
                   </Text>
+
                   {confirmPassInvalid && (
                     <Text color="red" size={"2"}>
                       Invalid Pattern

@@ -26,8 +26,7 @@ function validateUser(formData) {
     role: Joi.string().valid('guest', 'host'),
     name: Joi.string().required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-    // password: Joi.string().min(4),
-    password: Joi.string().pattern(new RegExp('^(?=.{8,16}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])')),
+    password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$')).required(),
   });
 
   return schema.validate({ id, username, role, name, email, password }, { abortEarly: false });
@@ -79,9 +78,8 @@ function validateDeleteUserData(formData) {
   const verificationStrOrg = 'delete my account';
 
   const schema = Joi.object({
-    // password: Joi.string().min(4).required(),
-    password: Joi.string().pattern(new RegExp('^(?=.{8,16}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])')),
     verificationStr: Joi.string().valid(verificationStrOrg).required(),
+    password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$')).required(),
   })
 
   return schema.validate({ password, verificationStr }, { abortEarly: false });
@@ -252,8 +250,7 @@ export async function changePassword(prevState, formData) {
   }
 
   const schema = Joi.object({
-    // password: Joi.string().min(4),
-    password: Joi.string().pattern(new RegExp('^(?=.{8,16}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])')),
+    password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$')).required(),
   });
   const { value: validatedData, error } = schema.validate({ password: passwordNew });
 

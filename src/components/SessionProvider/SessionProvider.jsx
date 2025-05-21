@@ -20,7 +20,7 @@ export default function SessionProvider({ children }) {
     async function asyncEffect() {
       const nextSession = await getSessionServerSide();
       const role = await getUserRole();
-      console.log("onload session", nextSession);
+      // console.log("onload session", nextSession);
       setSession(nextSession);
       setRole(role);
     }

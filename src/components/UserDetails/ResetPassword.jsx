@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
-import { ToastContext } from "../ToastProvider";
-import useToggle from "@/utils/hooks/use-toggle";
-import { changePassword } from "@/utils/actions/usersCrud";
+'use client'
+import { changePassword } from '@/utils/actions/usersCrud'
+import useToggle from '@/utils/hooks/use-toggle'
+import React from 'react'
+import { ToastContext } from '../ToastProvider'
 
 import {
   AlertDialog,
@@ -10,78 +10,78 @@ import {
   Flex,
   IconButton,
   Text,
-  TextField,
-} from "@radix-ui/themes";
-import HelperCard from "../HelperCard";
-import { Eye, EyeOff } from "lucide-react";
+  TextField
+} from '@radix-ui/themes'
+import { Eye, EyeOff } from 'lucide-react'
+import HelperCard from '../HelperCard'
 
 export default function ResetPassword({ username }) {
-  const id = React.useId();
-  const [newPassword, setNewPassword] = React.useState("");
-  const [passwordsNoMatch, setPassowrdsNoMatch] = React.useState(false);
-  const [newPassInvalid, setNewPassInvalid] = React.useState(false);
-  const [confirmPassInvalid, setConfirmPassInvalid] = React.useState(false);
-  const { createToast } = React.useContext(ToastContext);
-  const [open, toggle] = useToggle();
-  const [showCP, toggleShowCP] = useToggle(); // toggle b/w input types for "current-password"
-  const [showNP, toggleShowNP] = useToggle(); // toggle b/w input types for "new-password"
-  const [showCoP, toggleShowCoP] = useToggle(); // toggle b/w input types for "confirm-password"
+  const id = React.useId()
+  const [newPassword, setNewPassword] = React.useState('')
+  const [passwordsNoMatch, setPassowrdsNoMatch] = React.useState(false)
+  const [newPassInvalid, setNewPassInvalid] = React.useState(false)
+  const [confirmPassInvalid, setConfirmPassInvalid] = React.useState(false)
+  const { createToast } = React.useContext(ToastContext)
+  const [open, toggle] = useToggle()
+  const [showCP, toggleShowCP] = useToggle() // toggle b/w input types for "current-password"
+  const [showNP, toggleShowNP] = useToggle() // toggle b/w input types for "new-password"
+  const [showCoP, toggleShowCoP] = useToggle() // toggle b/w input types for "confirm-password"
 
   const [formState, formAction, isPending] = React.useActionState(
     changePassword,
     null
-  );
+  )
 
   React.useEffect(() => {
     if (formState?.success) {
-      createToast("Password changed", "success");
-      toggle();
+      createToast('Password changed', 'success')
+      toggle()
     }
     if (formState?.message) {
-      createToast(formState.message, "error");
+      createToast(formState.message, 'error')
     }
-  }, [formState]);
+  }, [formState])
 
   function validatePassword(password) {
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-    return regex.test(password);
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/
+    return regex.test(password)
   }
 
   function handleNewPasswordChange(e) {
-    const newPass = e.target.value;
-    setNewPassword(newPass);
-    const isPasswordValid = validatePassword(newPass);
+    const newPass = e.target.value
+    setNewPassword(newPass)
+    const isPasswordValid = validatePassword(newPass)
     if ((newPass.length > 0 && isPasswordValid) || newPass.length === 0) {
-      setNewPassInvalid(false);
+      setNewPassInvalid(false)
     } else {
-      setNewPassInvalid(true);
+      setNewPassInvalid(true)
     }
   }
 
   function handleConfirmPasswordChange(e) {
-    const inputValue = e.target.value;
+    const inputValue = e.target.value
 
-    const isPasswordValid = validatePassword(inputValue);
+    const isPasswordValid = validatePassword(inputValue)
     if ((inputValue.length > 0 && isPasswordValid) || inputValue.length === 0) {
-      setConfirmPassInvalid(false);
+      setConfirmPassInvalid(false)
     } else {
-      setConfirmPassInvalid(true);
+      setConfirmPassInvalid(true)
     }
 
     if (inputValue !== newPassword) {
-      setPassowrdsNoMatch(true);
+      setPassowrdsNoMatch(true)
     } else {
-      setPassowrdsNoMatch(false);
+      setPassowrdsNoMatch(false)
     }
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-    // if (!passwordsNoMatch && !confirmPassInvalid && !newPassInvalid) {
-    //   const fd = new FormData(e.target);
-    //   React.startTransition(async () => formAction(fd));
-    // }
+    e.preventDefault()
+    if (!passwordsNoMatch && !confirmPassInvalid && !newPassInvalid) {
+      const fd = new FormData(e.target)
+      React.startTransition(async () => formAction(fd))
+    }
   }
 
   return (
@@ -95,7 +95,7 @@ export default function ResetPassword({ username }) {
 
         <AlertDialog.Content>
           <AlertDialog.Title>Reset Password</AlertDialog.Title>
-          <AlertDialog.Description size={"2"}>
+          <AlertDialog.Description size={'2'}>
             <Text>
               To reset your password, please enter your current password and
               choose a new one.
@@ -107,27 +107,27 @@ export default function ResetPassword({ username }) {
 
           <Flex
             asChild
-            align={"center"}
-            justify={"center"}
-            direction={"column"}
-            py={"2"}
+            align={'center'}
+            justify={'center'}
+            direction={'column'}
+            py={'2'}
           >
             <form onSubmit={handleSubmit}>
               <input type="hidden" name="username" value={username} />
               {/* current password */}
-              <Flex direction={"column"} width={"100%"} mb={"3"}>
-                <Text as="label" htmlFor={`${id}-current-password`} size={"2"}>
+              <Flex direction={'column'} width={'100%'} mb={'3'}>
+                <Text as="label" htmlFor={`${id}-current-password`} size={'2'}>
                   Current Password
                 </Text>
                 <TextField.Root
                   id={`${id}-current-password`}
                   name="current-password"
-                  type={showCP ? "text" : "password"}
+                  type={showCP ? 'text' : 'password'}
                   required
                 >
                   <TextField.Slot side="right">
                     <IconButton
-                      size={"1"}
+                      size={'1'}
                       variant="ghost"
                       color="gray"
                       highContrast
@@ -135,9 +135,9 @@ export default function ResetPassword({ username }) {
                       type="button"
                     >
                       {showCP ? (
-                        <Eye size={"16px"} color="black" />
+                        <Eye size={'16px'} color="black" />
                       ) : (
-                        <EyeOff size={"16px"} color="black" />
+                        <EyeOff size={'16px'} color="black" />
                       )}
                     </IconButton>
                   </TextField.Slot>
@@ -145,20 +145,20 @@ export default function ResetPassword({ username }) {
               </Flex>
 
               {/* new password */}
-              <Flex direction={"column"} width={"100%"} mb={"3"}>
-                <Flex align={"center"} justify={"between"}>
-                  <Flex align={"center"}>
-                    <Text as="label" htmlFor={`${id}-new-password`} size={"2"}>
+              <Flex direction={'column'} width={'100%'} mb={'3'}>
+                <Flex align={'center'} justify={'between'}>
+                  <Flex align={'center'}>
+                    <Text as="label" htmlFor={`${id}-new-password`} size={'2'}>
                       New Password
                     </Text>
                     <HelperCard
                       message={
-                        "Password must contain: atleast one lowercase letter, one uppercase letter, one number, one symbol and should be 8-16 characters long."
+                        'Password must contain: atleast one lowercase letter, one uppercase letter, one number, one symbol and should be 8-16 characters long.'
                       }
                     />
                   </Flex>
                   {newPassInvalid && (
-                    <Text color="red" size={"2"}>
+                    <Text color="red" size={'2'}>
                       Invalid Pattern
                     </Text>
                   )}
@@ -168,12 +168,12 @@ export default function ResetPassword({ username }) {
                   name="new-password"
                   value={newPassword}
                   onChange={handleNewPasswordChange}
-                  type={showNP ? "text" : "password"}
+                  type={showNP ? 'text' : 'password'}
                   required
                 >
                   <TextField.Slot side="right">
                     <IconButton
-                      size={"1"}
+                      size={'1'}
                       variant="ghost"
                       color="gray"
                       highContrast
@@ -181,9 +181,9 @@ export default function ResetPassword({ username }) {
                       type="button"
                     >
                       {showNP ? (
-                        <Eye size={"16px"} color="black" />
+                        <Eye size={'16px'} color="black" />
                       ) : (
-                        <EyeOff size={"16px"} color="black" />
+                        <EyeOff size={'16px'} color="black" />
                       )}
                     </IconButton>
                   </TextField.Slot>
@@ -191,18 +191,18 @@ export default function ResetPassword({ username }) {
               </Flex>
 
               {/* confirm password */}
-              <Flex direction={"column"} width={"100%"} mb={"3"}>
-                <Flex align={"center"} justify={"between"}>
+              <Flex direction={'column'} width={'100%'} mb={'3'}>
+                <Flex align={'center'} justify={'between'}>
                   <Text
                     as="label"
                     htmlFor={`${id}-confirm-password`}
-                    size={"2"}
+                    size={'2'}
                   >
                     Confirm Password
                   </Text>
 
                   {confirmPassInvalid && (
-                    <Text color="red" size={"2"}>
+                    <Text color="red" size={'2'}>
                       Invalid Pattern
                     </Text>
                   )}
@@ -210,9 +210,9 @@ export default function ResetPassword({ username }) {
                 <TextField.Root
                   id={`${id}-confirm-password`}
                   name="confirm-password"
-                  color={passwordsNoMatch ? "red" : ""}
+                  color={passwordsNoMatch ? 'red' : ''}
                   onChange={handleConfirmPasswordChange}
-                  type={showCoP ? "text" : "password"}
+                  type={showCoP ? 'text' : 'password'}
                   required
                 >
                   {passwordsNoMatch && (
@@ -225,7 +225,7 @@ export default function ResetPassword({ username }) {
                   )}
                   <TextField.Slot side="right">
                     <IconButton
-                      size={"1"}
+                      size={'1'}
                       variant="ghost"
                       color="gray"
                       highContrast
@@ -233,26 +233,26 @@ export default function ResetPassword({ username }) {
                       type="button"
                     >
                       {showCoP ? (
-                        <Eye size={"16px"} color="black" />
+                        <Eye size={'16px'} color="black" />
                       ) : (
-                        <EyeOff size={"16px"} color="black" />
+                        <EyeOff size={'16px'} color="black" />
                       )}
                     </IconButton>
                   </TextField.Slot>
                 </TextField.Root>
               </Flex>
 
-              <Flex gap="3" mt="4" justify="end" width={"100%"}>
+              <Flex gap="3" mt="4" justify="end" width={'100%'}>
                 <Button
                   variant="soft"
                   type="button"
                   color="gray"
                   onClick={() => {
-                    setNewPassword("");
-                    setPassowrdsNoMatch(false);
-                    setConfirmPassInvalid(false);
-                    setNewPassInvalid(false);
-                    toggle();
+                    setNewPassword('')
+                    setPassowrdsNoMatch(false)
+                    setConfirmPassInvalid(false)
+                    setNewPassInvalid(false)
+                    toggle()
                   }}
                 >
                   Cancel
@@ -271,5 +271,5 @@ export default function ResetPassword({ username }) {
         </AlertDialog.Content>
       </AlertDialog.Root>
     </>
-  );
+  )
 }

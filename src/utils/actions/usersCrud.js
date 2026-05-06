@@ -387,8 +387,6 @@ export async function deleteUser(prevState, formData) {
   const { user } = isReqValid
   const rejectedData = rejectImmutableUsers(user.username)
 
-  console.log(user, rejectedData)
-
   if (rejectedData) return rejectedData
 
   // validate data

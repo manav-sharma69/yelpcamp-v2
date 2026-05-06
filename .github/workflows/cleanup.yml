@@ -1,0 +1,36 @@
+name: Weekly Cleanup
+on:
+  schedule:
+    - cron: '0 2 * * 0' # Every Sunday at 2 AM UTC
+  workflow_dispatch: # Manual trigger button
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger cleanup API
+        id: cleanup
+        run: |
+          response=$(curl -X POST ${{ secrets.BASE_URL }}/api/db-cleanup \
+            -H "Content-Type: application/json" \
+            -d '{"password":"${{ secrets.CLEANUP_PASSWORD }}"}' \
+            -w "\n%{http_code}" \
+            -s \
+            --fail-with-body)
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+
+          if [ "$http_code" -ne 200 ]; then
+            echo "::error::Cleanup failed with status $http_code"
+            exit 1
+          fi
+
+          echo "Cleanup completed successfully"
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "::warning::Cleanup job failed - check logs"

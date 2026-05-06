@@ -1,42 +1,47 @@
-"use client";
-import React from "react";
-import { usePathname } from "next/navigation";
-import { SessionContext } from "../SessionProvider";
+'use client'
+import { usePathname } from 'next/navigation'
+import React from 'react'
+import { SessionContext } from '../SessionProvider'
 
-import Link from "../Link";
-import { Box, Button, DropdownMenu, Flex, Text } from "@radix-ui/themes";
-import SignOut from "../SignOut";
-import AuthCTAs from "./AuthCTAs";
-import { signOut } from "@/utils/auth/helpers";
-import { ToastContext } from "../ToastProvider";
+import { signOut } from '@/utils/auth/helpers'
+import { Box, Button, DropdownMenu, Flex, Text } from '@radix-ui/themes'
+import Link from '../Link'
+import SignOut from '../SignOut'
+import { ToastContext } from '../ToastProvider'
+import AuthCTAs from './AuthCTAs'
 
 export default function NavLinks() {
-  const pathname = usePathname();
-  const { session, role } = React.useContext(SessionContext);
+  const pathname = usePathname()
+  const { session, role } = React.useContext(SessionContext)
   const hostingLabel =
-    role && role === "host" ? "Switch to hosting" : "Start Hosting";
+    role && role === 'host' ? 'Switch to hosting' : 'Start Hosting'
 
   const currPath = {
-    isLoginPage: pathname.includes("/login"),
-    isSignUpPage: pathname.includes("/signup"),
-    isHostingPage: pathname.includes("/host"),
-    isAboutPage: pathname.includes("/about"),
-    isAccountPage: pathname.includes("/account"),
-    isCreateCampgroundPage: pathname.includes("/host/new"),
-  };
+    isLoginPage: pathname.includes('/login'),
+    isSignUpPage: pathname.includes('/signup'),
+    isHostingPage: pathname.includes('/host'),
+    isAboutPage: pathname.includes('/about'),
+    isAccountPage: pathname.includes('/account'),
+    isCreateCampgroundPage: pathname.includes('/host/new'),
+    isCleanupPage: pathname.includes('/cleanup')
+  }
+
+  if (currPath.isCleanupPage) {
+    return null
+  }
 
   return (
-    <Flex gapX={"6"} align={"center"}>
+    <Flex gapX={'6'} align={'center'}>
       <Flex
-        display={{ initial: "none", sm: "flex" }}
-        align={"center"}
-        gapX={"6"}
+        display={{ initial: 'none', sm: 'flex' }}
+        align={'center'}
+        gapX={'6'}
       >
         {session ? (
           <Link
             href="/account"
             style={{
-              borderBottom: currPath.isAccountPage && "2px solid currentColor",
+              borderBottom: currPath.isAccountPage && '2px solid currentColor'
             }}
           >
             Account
@@ -45,7 +50,7 @@ export default function NavLinks() {
 
         {currPath.isHostingPage &&
         !currPath.isCreateCampgroundPage &&
-        role === "host" ? (
+        role === 'host' ? (
           <Link href="/host/new">
             <Button>List New Campground</Button>
           </Link>
@@ -56,12 +61,11 @@ export default function NavLinks() {
           currPath.isLoginPage ||
           currPath.isSignUpPage
         ) && (
-          <Box display={{ initial: "none", sm: "block" }}>
+          <Box display={{ initial: 'none', sm: 'block' }}>
             <Link
               href="/host"
               style={{
-                borderBottom:
-                  currPath.isHostingPage && "2px solid currentColor",
+                borderBottom: currPath.isHostingPage && '2px solid currentColor'
               }}
             >
               {hostingLabel}
@@ -71,7 +75,7 @@ export default function NavLinks() {
         <AuthCTAs />
       </Flex>
 
-      <Box display={{ sm: "none" }}>
+      <Box display={{ sm: 'none' }}>
         {!!session ? (
           // role === "host" ? (
           //   <LoggedInHostMenu />
@@ -88,18 +92,18 @@ export default function NavLinks() {
         )}
       </Box>
     </Flex>
-  );
+  )
 }
 
 function LoggedInMenu({ currPath, hostingLabel, role }) {
-  const { refresh, toggleCTAs } = React.useContext(SessionContext);
-  const { createToast } = React.useContext(ToastContext);
+  const { refresh, toggleCTAs } = React.useContext(SessionContext)
+  const { createToast } = React.useContext(ToastContext)
 
   async function handleOnClick() {
-    toggleCTAs();
-    signOut();
-    refresh();
-    createToast(`You've been logged out.`, "success");
+    toggleCTAs()
+    signOut()
+    refresh()
+    createToast(`You've been logged out.`, 'success')
   }
   return (
     <DropdownMenu.Root>
@@ -120,7 +124,7 @@ function LoggedInMenu({ currPath, hostingLabel, role }) {
 
         {currPath.isHostingPage &&
         !currPath.isCreateCampgroundPage &&
-        role === "host" ? (
+        role === 'host' ? (
           <DropdownMenu.Item asChild>
             <Link href="/host/new">List New Campground</Link>
           </DropdownMenu.Item>
@@ -143,7 +147,7 @@ function LoggedInMenu({ currPath, hostingLabel, role }) {
         )}
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  );
+  )
 }
 
 function LoggedOutMenu({ currPath }) {
@@ -179,7 +183,7 @@ function LoggedOutMenu({ currPath }) {
         )}
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  );
+  )
 }
 
 function LoggedInHostMenu() {
@@ -205,5 +209,5 @@ function LoggedInHostMenu() {
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  );
+  )
 }

@@ -1,17 +1,9 @@
-import React from "react";
-import { getCampgrounds } from "@/utils/actions/campgroundsCrud";
+import { getCampgrounds } from '@/utils/actions/campgroundsCrud'
 
-import HomePageMap from "@/components/HomePageMap";
-import ViewToggle from "@/components/ViewToggle";
-import CGIndex from "@/components/CGIndex";
+import HomePageClient from '@/components/HomePageClient'
 
 export default async function HomePage() {
-  const campgrounds = await getCampgrounds(12);
+  const campgrounds = await getCampgrounds(12)
 
-  return (
-    <ViewToggle>
-      <CGIndex initialCampgrounds={campgrounds} />
-      <HomePageMap />
-    </ViewToggle>
-  );
+  return <HomePageClient campgrounds={campgrounds} />
 }

@@ -2,7 +2,7 @@
 
 import ResponsiveContainer from '@/components/RespContainer'
 import { ToastContext } from '@/components/ToastProvider'
-import { cleanUpNonAdminUsers } from '@/utils/actions/db'
+import { cleanUpNonAdminUsers } from '@/utils/actions/usersCrud'
 import {
   Form,
   FormControl,

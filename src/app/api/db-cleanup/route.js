@@ -1,4 +1,4 @@
-import { cleanUpNonAdminUsers } from '@/utils/actions/db'
+import { cleanUpNonAdminUsers } from '@/utils/actions/usersCrud'
 
 export async function POST(request) {
   const { password } = await request.json()

@@ -1,7 +1,5 @@
 'use server'
 import pkg from 'pg'
-import { IMMUTABLE_USERS } from '../contants/user-constraints'
-import { deleteImagesByUserID } from './imagesCrud'
 const { Pool } = pkg
 
 // { CAMPGROUNDS_ADDED: 142, CAMPGROUNDS_SKIPPED: 519, TOTAL: 661 }
@@ -156,66 +154,6 @@ async function deleteTable(tableName) {
     console.log(`Table "${sanitizedTableName}" deleted successfully.`)
   } catch (error) {
     console.error('Error deleting table:', error.message)
-  }
-}
-
-// Deletes all data created by non-admin users along with the images
-export async function cleanUpNonAdminUsers(_, formData) {
-  const password = formData.get('password')
-
-  if (password !== process.env.ADMIN_CLEANUP_PASSWORD) {
-    console.log('wrong cleanup password! recieved: ', password)
-
-    return {
-      serverError: true,
-      message: 'Something went wrong!'
-    }
-  }
-
-  try {
-    // Get non-admin user IDs
-    const { rows } = await pool.query(
-      `SELECT id FROM users
-       WHERE is_admin = FALSE
-       AND username != ALL($1)`,
-      [IMMUTABLE_USERS]
-    )
-
-    if (rows.length === 0) {
-      return {
-        success: true,
-        message: 'No users to delete'
-      }
-    }
-
-    // Delete images with error tracking
-    await Promise.allSettled(rows.map((row) => deleteImagesByUserID(row.id)))
-
-    // Delete users in transaction
-    await pool.query('BEGIN')
-    try {
-      await pool.query(
-        `DELETE FROM users
-         WHERE is_admin = FALSE
-         AND username != ALL($1)`,
-        [IMMUTABLE_USERS]
-      )
-      await pool.query('COMMIT')
-
-      return {
-        success: true,
-        message: 'Cleanup completed successfully'
-      }
-    } catch (e) {
-      await pool.query('ROLLBACK')
-      throw e
-    }
-  } catch (e) {
-    console.error('Cleanup error:', e)
-    return {
-      serverError: true,
-      message: 'Internal server error'
-    }
   }
 }
 

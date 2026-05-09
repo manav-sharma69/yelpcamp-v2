@@ -1,0 +1,20 @@
+.tech-stack-table {
+  border-radius: 16px;
+  border: 1px solid lightgrey;
+
+  & caption {
+    margin-top: 8px;
+    caption-side: bottom;
+  }
+
+  & td {
+    text-align: center;
+  }
+
+  & th[scope='rowgroup'] {
+    background-color: gray;
+    padding-block: 8px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+}

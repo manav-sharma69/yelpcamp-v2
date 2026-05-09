@@ -6,7 +6,6 @@ import { SessionContext } from '../SessionProvider'
 import { signOut } from '@/utils/auth/helpers'
 import { Box, Button, DropdownMenu, Flex, Text } from '@radix-ui/themes'
 import Link from '../Link'
-import SignOut from '../SignOut'
 import { ToastContext } from '../ToastProvider'
 import AuthCTAs from './AuthCTAs'
 
@@ -37,6 +36,15 @@ export default function NavLinks() {
         align={'center'}
         gapX={'6'}
       >
+        <Link
+          href="/about"
+          style={{
+            borderBottom: currPath.isAboutPage && '2px solid currentColor'
+          }}
+        >
+          About
+        </Link>
+
         {session ? (
           <Link
             href="/account"
@@ -77,11 +85,6 @@ export default function NavLinks() {
 
       <Box display={{ sm: 'none' }}>
         {!!session ? (
-          // role === "host" ? (
-          //   <LoggedInHostMenu />
-          // ) : (
-          //   <LoggedInGuestMenu />
-          // )
           <LoggedInMenu
             role={role}
             currPath={currPath}
@@ -181,32 +184,6 @@ function LoggedOutMenu({ currPath }) {
             </DropdownMenu.Item>
           </>
         )}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
-  )
-}
-
-function LoggedInHostMenu() {
-  return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        <Button>U</Button>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content>
-        <DropdownMenu.Item asChild>
-          <Link href="/account">Account</Link>
-        </DropdownMenu.Item>
-        <DropdownMenu.Item asChild>
-          <Link href="/host">Start Hosting</Link>
-        </DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item>
-          <SignOut />
-        </DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item asChild>
-          <Link href="/about">About</Link>
-        </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   )

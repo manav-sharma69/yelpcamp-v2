@@ -11,7 +11,7 @@
   "dependencies": {
     "@maptiler/sdk": "^3.0.1",
     "@radix-ui/react-form": "^0.1.8",
-    "@radix-ui/themes": "^3.2.0",
+    "@radix-ui/themes": "^3.3.0",
     "@uploadthing/react": "^7.3.0",
     "bcrypt": "^5.1.1",
     "embla-carousel": "^8.5.2",

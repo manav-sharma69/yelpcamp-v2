@@ -110,10 +110,10 @@ export default function AboutPage() {
           </div>
         </Section>
 
-        <Section id={ABOUT_PAGE_SECTIONS.guestFeatures}>
+        <Section>
           <Heading2>What Can Visitors Do?</Heading2>
 
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%' }} id={ABOUT_PAGE_SECTIONS.guestFeatures}>
             <Heading3 style={{ marginBottom: 12 }}>As a Guest</Heading3>
             <div>
               <Text>Without signing in, visitors can:</Text>
@@ -125,7 +125,10 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div style={{ width: '100%' }}>
+          <div
+            style={{ width: '100%' }}
+            id={ABOUT_PAGE_SECTIONS.authenticatedUserFeatures}
+          >
             <Heading3 style={{ marginBottom: 12 }}>
               After Authentication
             </Heading3>
